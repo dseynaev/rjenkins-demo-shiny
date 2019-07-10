@@ -34,5 +34,7 @@ RUN R -q -e "install.packages(c('testthat'), repos='https://cloud.r-project.org'
 RUN R -q -e "install.packages(c('tinytex'), repos='https://cloud.r-project.org')"
 RUN R -q -e "tinytex::install_tinytex()"
 
+RUN apt-get purge texlive*
+
 # dependencies
 RUN R -q -e "install.packages(c('shiny'), repos='https://cloud.r-project.org')"

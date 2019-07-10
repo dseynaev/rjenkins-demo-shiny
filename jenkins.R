@@ -29,4 +29,6 @@ mjob %>% scheduleBuild()
 
 job <- mjob %>% getJob("master")
 
+job %>% scheduleBuild()
+
 summary(job)
