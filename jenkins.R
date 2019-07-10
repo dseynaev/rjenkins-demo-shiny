@@ -4,15 +4,18 @@ write(file = "Jenkinsfile", rjenkins::pipeline(
     stages(
         stage("R Package",
             agent(
-                dockerfile(
-                    fileName = "Dockerfile.build",
-                    reuseNode = TRUE
-                )
+                docker("rocker/r-ver:3.5.3")
             ),
             steps(
                 R(roxygen2::roxygenize('demoApp')),
                 sh("R CMD build demoApp"),
                 sh("R CMD check demoApp_*.tar.gz")
+            )
+        ),
+        stage("Docker Image",
+            steps(
+                sh("docker build -t openanalytics/rjenkins-demo-app ."),
+                sh("docker push openanalytics/rjenkins-demo-app")
             )
         )
     ),
@@ -37,3 +40,8 @@ job <- mjob %>% getJob("master")
 job %>% scheduleBuild()
 
 summary(job)
+
+job %>% listArtifacts()
+
+job %>% installPackageArtifacts()
+

@@ -14,6 +14,8 @@ pipeline {
                 sh 'R CMD check demoApp_*.tar.gz'
             }
         }
+        stage('Docker Image') {
+        }
     }
     post {
         success {
