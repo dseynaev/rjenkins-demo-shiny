@@ -4,7 +4,7 @@ write(file = "Jenkinsfile", rjenkins::pipeline(
     stages(
         stage("R Package",
             agent(
-                docker("rocker/r-ver:3.5.3")
+                dockerfile("Dockerfile.build", reuseNode = TRUE)
             ),
             steps(
                 R(roxygen2::roxygenize('demoApp')),

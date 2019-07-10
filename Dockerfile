@@ -1,5 +1,7 @@
 FROM openanalytics/shiny
 
+LABEL maintainer="daan.seynaeve@openanalytics.eu"
+
 COPY demoApp_*.tar.gz /tmp/
 RUN R CMD INSTALL /tmp/demoApp_*.tar.gz && rm /tmp/demoApp_*.tar.gz
 
