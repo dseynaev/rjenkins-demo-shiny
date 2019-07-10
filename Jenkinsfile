@@ -15,5 +15,8 @@ pipeline {
             }
         }
     }
+    post {
+        archiveArtifacts artifacts: '*.tar.gz, *.pdf'
+    }
 }
 

@@ -15,6 +15,9 @@ write(file = "Jenkinsfile", rjenkins::pipeline(
                 sh("R CMD check demoApp_*.tar.gz")
             )
         )
+    ),
+    post(
+        step("archiveArtifacts", artifacts = "*.tar.gz, *.pdf")
     )
 ))
 
