@@ -7,4 +7,5 @@ Author: Who wrote it
 Maintainer: Who wrote it <info@openanalytics.eu>
 Description: More about what it does (maybe more than one line).
 License: file LICENSE
+Imports: shiny
 RoxygenNote: 6.1.1
