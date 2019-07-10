@@ -17,7 +17,9 @@ write(file = "Jenkinsfile", rjenkins::pipeline(
         )
     ),
     post(
-        step("archiveArtifacts", artifacts = "*.tar.gz, *.pdf")
+        success(
+            step("archiveArtifacts", artifacts = "*.tar.gz, *.pdf")
+        )
     )
 ))
 

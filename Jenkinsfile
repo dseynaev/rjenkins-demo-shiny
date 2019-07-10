@@ -16,7 +16,9 @@ pipeline {
         }
     }
     post {
-        archiveArtifacts artifacts: '*.tar.gz, *.pdf'
+        success {
+            archiveArtifacts artifacts: '*.tar.gz, *.pdf'
+        }
     }
 }
 
