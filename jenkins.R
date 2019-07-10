@@ -15,7 +15,9 @@ write(file = "Jenkinsfile", rjenkins::pipeline(
         stage("Docker Image",
             steps(
                 sh("docker build -t openanalytics/rjenkins-demo-app ."),
-                sh("docker push openanalytics/rjenkins-demo-app")
+                withDockerRegistry(credentialsId = "hub-openanalytics",
+                    sh("docker push openanalytics/rjenkins-demo-app")
+                )
             )
         )
     ),
