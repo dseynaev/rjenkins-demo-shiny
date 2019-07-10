@@ -31,8 +31,17 @@ RUN R -q -e "install.packages(c('roxygen2'), repos='https://cloud.r-project.org'
 RUN R -q -e "install.packages(c('testthat'), repos='https://cloud.r-project.org')"
 
 # tinytex
-RUN R -q -e "install.packages(c('tinytex'), repos='https://cloud.r-project.org')"
-RUN R -q -e "tinytex::install_tinytex()"
+RUN wget -qO- \
+    "https://github.com/yihui/tinytex/raw/master/tools/install-unx.sh" | \
+    sh -s - --admin --no-path \
+  && mv ~/.TinyTeX /opt/TinyTeX \
+  && /opt/TinyTeX/bin/*/tlmgr path add \
+  && tlmgr install metafont mfware inconsolata tex ae parskip listings \
+  && tlmgr path add \
+  && Rscript -e "source('https://install-github.me/yihui/tinytex'); tinytex::r_texmf()" \
+  && chown -R root:staff /opt/TinyTeX \
+  && chmod -R g+w /opt/TinyTeX \
+  && chmod -R g+wx /opt/TinyTeX/bin \
 
 RUN apt-get purge texlive*
 RUN pdflatex --version
