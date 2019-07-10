@@ -17,7 +17,7 @@ pipeline {
         stage('Docker Image') {
             steps {
                 sh 'docker build -t openanalytics/rjenkins-demo-app .'
-                withDockerRegistry([credentialsId: "hub-openanalytics"]) {
+                withDockerRegistry([url: "", credentialsId: "hub-openanalytics"]) {
                     sh 'docker push openanalytics/rjenkins-demo-app'
                 }
             }
