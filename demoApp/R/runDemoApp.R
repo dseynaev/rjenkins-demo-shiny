@@ -4,6 +4,7 @@
 #' @param ... additional arguments to \code{\link[shiny]{runApp}}
 #' @return nothing
 #' @importFrom shiny runApp
+#' @importFrom methods getPackageName
 #' @export
 runDemoApp <- function(port = 3838, ...) {
   
