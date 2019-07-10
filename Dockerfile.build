@@ -1,0 +1,31 @@
+FROM openanalytics/r-base
+
+LABEL maintainer="daan.seynaeve@openanalytics.eu"
+
+# system dependencies
+RUN apt-get update -y && apt-get --no-install-recommends install -y \
+    pandoc \
+    pandoc-citeproc \
+    libcurl4-gnutls-dev \
+    libcairo2-dev \
+    libxt-dev \
+    libssl-dev \
+    libssh2-1-dev \
+    libxml2-dev \
+    && rm -rf /var/lib/apt/lists/*
+    
+# configure environment
+ENV R_LIBS_USER=/tmp/R_user_lib
+RUN rm -rf $R_LIBS_USER && mkdir -p $R_LIBS_USER
+RUN chown docker $R_LIBS_USER
+RUN chmod 777 $R_LIBS_USER
+
+ENV TAR_OPTIONS="--no-same-owner"
+ENV TESTTHAT_DEFAULT_CHECK_REPORTER="junit"
+ENV TESTTHAT_OUTPUT_FILE="results.xml"
+
+# roxygen
+RUN R -q -e "install.packages(c('roxygen2'), repos='https://cloud.r-project.org')"
+
+# testthat
+RUN R -q -e "install.packages(c('testthat'), repos='https://cloud.r-project.org')"
