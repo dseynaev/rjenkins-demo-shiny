@@ -14,16 +14,16 @@ write(file = "Jenkinsfile", rjenkins::pipeline(
         ),
         stage("Docker Image",
             steps(
-                sh("docker build -t openanalytics/rjenkins-demo-app ."),
-                withDockerRegistry(credentialsId = "hub-openanalytics", url = "",
-                    sh("docker push openanalytics/rjenkins-demo-app")
-                )
+                sh("docker build -t openanalytics/rjenkins-demo-app .")
             )
         )
     ),
     post(
         success(
-            step("archiveArtifacts", artifacts = "*.tar.gz, *.pdf")
+            step("archiveArtifacts", artifacts = "*.tar.gz, *.pdf"),
+            withDockerRegistry(credentialsId = "hub-openanalytics", url = "",
+                sh("docker push openanalytics/rjenkins-demo-app")
+            )
         )
     )
 ))
@@ -47,3 +47,4 @@ job %>% listArtifacts()
 
 job %>% installPackageArtifacts()
 
+job %>% getBuildLog() %>% cat
