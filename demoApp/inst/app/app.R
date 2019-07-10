@@ -3,7 +3,7 @@ ui <- function(request) {
   fluidPage(
       
       # App title ----
-      titlePanel("Hello Shiny and Maxim!"),
+      titlePanel("Hello Shiny!"),
       
       # Sidebar layout with input and output definitions ----
       sidebarLayout(
