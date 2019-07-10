@@ -10,8 +10,8 @@ pipeline {
             }
             steps {
                 sh 'R  -e \'roxygen2::roxygenize("demoApp")\''
-                sh 'R  -e \'devtools::build("demoApp")\''
-                sh 'R  -e \'devtools::check("demoApp_*.tar.gz")\''
+                sh 'R CMD build demoApp'
+                sh 'R CMD check demoApp_*.tar.gz'
             }
         }
     }

@@ -11,8 +11,8 @@ write(file = "Jenkinsfile", rjenkins::pipeline(
             ),
             steps(
                 R(roxygen2::roxygenize('demoApp')),
-                R(devtools::build('demoApp')),
-                R(devtools::check('demoApp_*.tar.gz'))
+                sh("R CMD build demoApp"),
+                sh("R CMD check demoApp_*.tar.gz")
             )
         )
     )
