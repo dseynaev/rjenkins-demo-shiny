@@ -9,11 +9,9 @@ pipeline {
                 }
             }
             steps {
-                sh script: ''' R -e \'{
-                    roxygen2::roxygenize("demoApp")
-                    devtools::build("demoApp")
-                    devtools::check("demoApp_*.tar.gz")
-                }\''''
+                sh 'R  -e \'roxygen2::roxygenize("demoApp")\''
+                sh 'R  -e \'devtools::build("demoApp")\''
+                sh 'R  -e \'devtools::check("demoApp_*.tar.gz")\''
             }
         }
     }

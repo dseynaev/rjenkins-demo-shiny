@@ -10,11 +10,9 @@ write(file = "Jenkinsfile", rjenkins::pipeline(
                 )
             ),
             steps(
-                R({
-                      roxygen2::roxygenize('demoApp')
-                      devtools::build('demoApp')
-                      devtools::check('demoApp_*.tar.gz')
-                })
+                R(roxygen2::roxygenize('demoApp')),
+                R(devtools::build('demoApp')),
+                R(devtools::check('demoApp_*.tar.gz'))
             )
         )
     )
