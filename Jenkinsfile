@@ -3,8 +3,9 @@ pipeline {
     stages {
         stage('R Package') {
             agent {
-                docker {
-                    image 'rocker/r-ver:3.5.3'
+                dockerfile {
+                    filename 'Dockerfile.build'
+                    reuseNode true
                 }
             }
             steps {
