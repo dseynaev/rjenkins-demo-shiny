@@ -17,15 +17,15 @@ pipeline {
         stage('Docker Image') {
             steps {
                 sh 'docker build -t openanalytics/rjenkins-demo-app .'
-                withDockerRegistry([url: "", credentialsId: "hub-openanalytics"]) {
-                    sh 'docker push openanalytics/rjenkins-demo-app'
-                }
             }
         }
     }
     post {
         success {
             archiveArtifacts artifacts: '*.tar.gz, *.pdf'
+            withDockerRegistry([url: "", credentialsId: "hub-openanalytics"]) {
+                sh 'docker push openanalytics/rjenkins-demo-app'
+            }
         }
     }
 }
