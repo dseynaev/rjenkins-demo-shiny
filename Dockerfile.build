@@ -12,6 +12,7 @@ RUN apt-get update -y && apt-get --no-install-recommends install -y \
     libssl-dev \
     libssh2-1-dev \
     libxml2-dev \
+    texinfo \
     && rm -rf /var/lib/apt/lists/*
     
 # configure environment
