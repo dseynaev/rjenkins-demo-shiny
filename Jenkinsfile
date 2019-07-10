@@ -2,12 +2,18 @@ pipeline {
     agent any
     stages {
         stage('R Package') {
+            agent {
+                dockerfile {
+                    filename 'Dockerfile.build'
+                    reuseNode true
+                }
+            }
             steps {
                 sh '''
                 R  -e \'{
-                    roxygen2::roxygenize("myPackage")
-                    devtools::build("myPackage")
-                    devtools::check("myPackage_*.tar.gz")
+                    roxygen2::roxygenize("demoApp")
+                    devtools::build("demoApp")
+                    devtools::check("demoApp_*.tar.gz")
                 }\'
                 '''
             }
