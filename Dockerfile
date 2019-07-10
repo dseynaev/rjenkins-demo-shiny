@@ -1,4 +1,4 @@
-FROM openanalytics/shiny
+FROM openanalytics/r-shiny
 
 LABEL maintainer="daan.seynaeve@openanalytics.eu"
 
