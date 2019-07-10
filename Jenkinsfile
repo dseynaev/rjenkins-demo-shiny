@@ -3,9 +3,8 @@ pipeline {
     stages {
         stage('R Package') {
             agent {
-                dockerfile {
-                    filename 'Dockerfile.build'
-                    reuseNode true
+                docker {
+                    image 'rocker/r-ver:3.5.3'
                 }
             }
             steps {
@@ -15,6 +14,10 @@ pipeline {
             }
         }
         stage('Docker Image') {
+            steps {
+                sh 'docker build -t openanalytics/rjenkins-demo-app .'
+                sh 'docker push openanalytics/rjenkins-demo-app'
+            }
         }
     }
     post {
