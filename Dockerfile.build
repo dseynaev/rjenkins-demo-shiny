@@ -30,5 +30,9 @@ RUN R -q -e "install.packages(c('roxygen2'), repos='https://cloud.r-project.org'
 # testthat
 RUN R -q -e "install.packages(c('testthat'), repos='https://cloud.r-project.org')"
 
+# tinytex
+RUN R -q -e "install.packages('tinytex'), repos='https://cloud.r-project.org')"
+RUN R -q -e "tinytex::install_tinytex()"
+
 # dependencies
 RUN R -q -e "install.packages(c('shiny'), repos='https://cloud.r-project.org')"
