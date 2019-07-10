@@ -19,3 +19,16 @@ write(file = "Jenkinsfile", rjenkins::pipeline(
         )
     )
 ))
+
+library(rjenkins)
+
+mjob <- jc %>% createJob("demoApp",
+    multibranchPipelineConfig(
+        gitHubBranchSource(owner = "dseynaev", repository = "rjenkins-demo-shiny",
+            credentialsId = "github-dseynaev")))
+
+mjob %>% scheduleBuild()
+
+job <- mjob %>% getJob("master")
+
+summary(job)
