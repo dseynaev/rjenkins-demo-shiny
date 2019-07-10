@@ -29,3 +29,6 @@ RUN R -q -e "install.packages(c('roxygen2'), repos='https://cloud.r-project.org'
 
 # testthat
 RUN R -q -e "install.packages(c('testthat'), repos='https://cloud.r-project.org')"
+
+# dependencies
+RUN R -q -e "install.packages(c('shiny'), repos='https://cloud.r-project.org')"
