@@ -35,6 +35,7 @@ RUN R -q -e "install.packages(c('tinytex'), repos='https://cloud.r-project.org')
 RUN R -q -e "tinytex::install_tinytex()"
 
 RUN apt-get purge texlive*
+RUN pdflatex --version
 
 # dependencies
 RUN R -q -e "install.packages(c('shiny'), repos='https://cloud.r-project.org')"
